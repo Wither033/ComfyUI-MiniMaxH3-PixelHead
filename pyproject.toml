@@ -1,0 +1,19 @@
+[project]
+name = "comfyui-minimaxh3-pixelhead"
+description = "[Experimental Preview - Not Recommended for Production Yet] Zero-Video-VAE 3D Non-Uniform Direct Pixel Head for MiniMax-H3 (45.7 MiB BF16, 8.5x faster; v3 Sharp update in progress)"
+version = "0.2.0"
+license = { file = "LICENSE" }
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "safetensors>=0.4.0",
+]
+
+[project.urls]
+Repository = "https://github.com/Wither033/ComfyUI-MiniMaxH3-PixelHead"
+Issues = "https://github.com/Wither033/ComfyUI-MiniMaxH3-PixelHead/issues"
+
+[tool.comfy]
+PublisherId = "wither033"
+DisplayName = "ComfyUI MiniMax-H3 Video PixelHead (Experimental Preview)"
+Icon = ""

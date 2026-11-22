@@ -1,0 +1,581 @@
+{
+  "last_node_id": 14,
+  "last_link_id": 15,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "MarkdownNote",
+      "pos": [
+        40,
+        -210
+      ],
+      "size": [
+        1460,
+        175
+      ],
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "⚠️ [实验预览版·暂不推荐正式使用] MiniMax-H3 免 Video VAE 视频直出预览工作流",
+      "widgets_values": [
+        "### MiniMax-H3 Video PixelHead（v0.2.0 实验预览版 —— 暂不推荐生产环境使用，请等待 v3 Sharp 优化）\n- **已知问题提示**：当前版本仅适合免加载 2.68GB Video VAE 的极低显存构图/动作草稿快览；复杂高频纹理（五官细节、油画笔触、快速遮挡）存在明显柔焦涂抹感，正式出片仍请使用官方 Video VAE 或等待后续 `v3 Sharp` 更新。\n- **接法**：将 `MiniMax-H3 Video Pixel Head Tap` 串在 `MiniMaxH3SigmaShift` 之后，采样输出接入 `MiniMax-H3 Video Pixel Decode` 即可。"
+      ]
+    },
+    {
+      "id": 2,
+      "type": "UNETLoader",
+      "pos": [
+        40,
+        20
+      ],
+      "size": [
+        440,
+        88
+      ],
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            1
+          ]
+        }
+      ],
+      "widgets_values": [
+        "minimax_h3_fl2va_pruned_w6a8.safetensors",
+        "default"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "CLIPLoader",
+      "pos": [
+        40,
+        145
+      ],
+      "size": [
+        440,
+        92
+      ],
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            4
+          ]
+        }
+      ],
+      "widgets_values": [
+        "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+        "minimax",
+        "default"
+      ]
+    },
+    {
+      "id": 4,
+      "type": "MiniMaxH3SigmaShift",
+      "pos": [
+        40,
+        270
+      ],
+      "size": [
+        440,
+        86
+      ],
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            2
+          ]
+        }
+      ],
+      "widgets_values": [
+        12.0,
+        3.0
+      ]
+    },
+    {
+      "id": 5,
+      "type": "MiniMaxH3PixelHeadLoader",
+      "pos": [
+        40,
+        390
+      ],
+      "size": [
+        440,
+        88
+      ],
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "pixel_head",
+          "type": "MINIMAX_H3_PIXEL_HEAD",
+          "links": [
+            13
+          ]
+        }
+      ],
+      "widgets_values": [
+        "minimax_h3_video_pixel_head_bf16.safetensors",
+        "bf16_trunk_fp32_out"
+      ]
+    },
+    {
+      "id": 6,
+      "type": "MiniMaxH3PixelHeadTap",
+      "pos": [
+        40,
+        515
+      ],
+      "size": [
+        440,
+        68
+      ],
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 2
+        }
+      ],
+      "outputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "links": [
+            3,
+            9
+          ]
+        },
+        {
+          "name": "pixel_tap",
+          "type": "MINIMAX_H3_TAP",
+          "links": [
+            14
+          ]
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "type": "CLIPTextEncode",
+      "pos": [
+        520,
+        20
+      ],
+      "size": [
+        440,
+        200
+      ],
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 4
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            5
+          ]
+        }
+      ],
+      "widgets_values": [
+        "Cinematic 24fps anime film shot of a young swordsman standing on a windy cliff overlooking sunlit clouds, hair and cloak flowing naturally in the breeze, smooth camera push-in. Audio: gentle mountain wind, fluttering cloth."
+      ]
+    },
+    {
+      "id": 8,
+      "type": "EmptyMiniMaxH3LatentAV",
+      "pos": [
+        520,
+        260
+      ],
+      "size": [
+        440,
+        110
+      ],
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            11
+          ]
+        }
+      ],
+      "widgets_values": [
+        896,
+        512,
+        124
+      ]
+    },
+    {
+      "id": 9,
+      "type": "BasicGuider",
+      "pos": [
+        1000,
+        20
+      ],
+      "size": [
+        340,
+        68
+      ],
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 3
+        },
+        {
+          "name": "conditioning",
+          "type": "CONDITIONING",
+          "link": 5
+        }
+      ],
+      "outputs": [
+        {
+          "name": "GUIDER",
+          "type": "GUIDER",
+          "links": [
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "type": "RandomNoise",
+      "pos": [
+        1000,
+        115
+      ],
+      "size": [
+        165,
+        80
+      ],
+      "order": 9,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "NOISE",
+          "type": "NOISE",
+          "links": [
+            6
+          ]
+        }
+      ],
+      "widgets_values": [
+        20261122,
+        "fixed"
+      ]
+    },
+    {
+      "id": 11,
+      "type": "KSamplerSelect",
+      "pos": [
+        1175,
+        115
+      ],
+      "size": [
+        165,
+        80
+      ],
+      "order": 10,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "SAMPLER",
+          "type": "SAMPLER",
+          "links": [
+            8
+          ]
+        }
+      ],
+      "widgets_values": [
+        "euler"
+      ]
+    },
+    {
+      "id": 12,
+      "type": "BasicScheduler",
+      "pos": [
+        1000,
+        220
+      ],
+      "size": [
+        340,
+        106
+      ],
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 9
+        }
+      ],
+      "outputs": [
+        {
+          "name": "SIGMAS",
+          "type": "SIGMAS",
+          "links": [
+            10
+          ]
+        }
+      ],
+      "widgets_values": [
+        "simple",
+        8,
+        1.0
+      ]
+    },
+    {
+      "id": 13,
+      "type": "SamplerCustomAdvanced",
+      "pos": [
+        1000,
+        355
+      ],
+      "size": [
+        340,
+        120
+      ],
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "noise",
+          "type": "NOISE",
+          "link": 6
+        },
+        {
+          "name": "guider",
+          "type": "GUIDER",
+          "link": 7
+        },
+        {
+          "name": "sampler",
+          "type": "SAMPLER",
+          "link": 8
+        },
+        {
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "link": 10
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 11
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "links": [
+            12
+          ]
+        },
+        {
+          "name": "denoised_output",
+          "type": "LATENT",
+          "links": []
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "type": "MiniMaxH3VideoPixelDecode",
+      "pos": [
+        1000,
+        505
+      ],
+      "size": [
+        340,
+        120
+      ],
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 12
+        },
+        {
+          "name": "pixel_head",
+          "type": "MINIMAX_H3_PIXEL_HEAD",
+          "link": 13
+        },
+        {
+          "name": "pixel_tap",
+          "type": "MINIMAX_H3_TAP",
+          "link": 14
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": []
+        }
+      ],
+      "widgets_values": [
+        10
+      ]
+    }
+  ],
+  "links": [
+    [
+      1,
+      2,
+      0,
+      4,
+      0,
+      "MODEL"
+    ],
+    [
+      2,
+      4,
+      0,
+      6,
+      0,
+      "MODEL"
+    ],
+    [
+      3,
+      6,
+      0,
+      9,
+      0,
+      "MODEL"
+    ],
+    [
+      4,
+      3,
+      0,
+      7,
+      0,
+      "CLIP"
+    ],
+    [
+      5,
+      7,
+      0,
+      9,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      6,
+      10,
+      0,
+      13,
+      0,
+      "NOISE"
+    ],
+    [
+      7,
+      9,
+      0,
+      13,
+      1,
+      "GUIDER"
+    ],
+    [
+      8,
+      11,
+      0,
+      13,
+      2,
+      "SAMPLER"
+    ],
+    [
+      9,
+      6,
+      0,
+      12,
+      0,
+      "MODEL"
+    ],
+    [
+      10,
+      12,
+      0,
+      13,
+      3,
+      "SIGMAS"
+    ],
+    [
+      11,
+      8,
+      0,
+      13,
+      4,
+      "LATENT"
+    ],
+    [
+      12,
+      13,
+      0,
+      14,
+      0,
+      "LATENT"
+    ],
+    [
+      13,
+      5,
+      0,
+      14,
+      1,
+      "MINIMAX_H3_PIXEL_HEAD"
+    ],
+    [
+      14,
+      6,
+      1,
+      14,
+      2,
+      "MINIMAX_H3_TAP"
+    ]
+  ],
+  "version": 0.4
+}
