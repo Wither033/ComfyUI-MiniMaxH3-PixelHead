@@ -19,7 +19,7 @@
       "outputs": [],
       "title": "[Experimental Preview - Not Recommended for Production] MiniMax-H3 Zero-Video-VAE PixelHead",
       "widgets_values": [
-        "### MiniMax-H3 Video PixelHead (v0.2.0 Experimental Preview — NOT Recommended for Production Yet)\n- **Status Warning**: Useful for zero-Video-VAE low-VRAM motion/layout drafting, but fine high-frequency textures (faces, brushwork, fast occlusion) are currently over-smoothed. Please wait for the upcoming `v3 Sharp` update for production quality!\n- **Wiring**: Insert `MiniMax-H3 Video Pixel Head Tap` after `MiniMaxH3SigmaShift`, and connect `MiniMax-H3 Video Pixel Decode (Zero Video VAE)` to `SamplerCustomAdvanced`."
+        "### MiniMax-H3 Video PixelHead (v0.2.0 Experimental Preview — NOT Recommended for Production Yet)\n- **Status Warning**: Useful for zero-Video-VAE low-VRAM motion/layout drafting, but fine high-frequency textures (faces, brushwork, fast occlusion) are currently over-smoothed. Please wait for the upcoming `v3 Sharp` update for production renders.\n- **Wiring**: Insert `MiniMax-H3 Video Pixel Head Tap` after `MiniMaxH3SigmaShift`, and connect `MiniMax-H3 Video Pixel Decode (Zero Video VAE)` to `SamplerCustomAdvanced`."
       ]
     },
     {

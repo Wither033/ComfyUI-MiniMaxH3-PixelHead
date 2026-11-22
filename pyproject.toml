@@ -1,7 +1,7 @@
 [project]
 name = "comfyui-minimaxh3-pixelhead"
-description = "[Experimental Preview - Not Recommended for Production Yet] Zero-Video-VAE 3D Non-Uniform Direct Pixel Head for MiniMax-H3 (45.7 MiB BF16, 8.5x faster; v3 Sharp update in progress)"
-version = "0.2.0"
+description = "[Experimental Preview - Not Recommended for Production] 3D video pixel readout head for MiniMax-H3 in ComfyUI"
+version = "0.2.1"
 license = { file = "LICENSE" }
 readme = "README.md"
 requires-python = ">=3.10"

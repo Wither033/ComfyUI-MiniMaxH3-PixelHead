@@ -17,7 +17,7 @@
       "mode": 0,
       "inputs": [],
       "outputs": [],
-      "title": "⚠️ [实验预览版·暂不推荐正式使用] MiniMax-H3 免 Video VAE 视频直出预览工作流",
+      "title": "⚠[实验预览版·暂不推荐正式使用] MiniMax-H3 免 Video VAE 视频直出预览工作流",
       "widgets_values": [
         "### MiniMax-H3 Video PixelHead（v0.2.0 实验预览版 —— 暂不推荐生产环境使用，请等待 v3 Sharp 优化）\n- **已知问题提示**：当前版本仅适合免加载 2.68GB Video VAE 的极低显存构图/动作草稿快览；复杂高频纹理（五官细节、油画笔触、快速遮挡）存在明显柔焦涂抹感，正式出片仍请使用官方 Video VAE 或等待后续 `v3 Sharp` 更新。\n- **接法**：将 `MiniMax-H3 Video Pixel Head Tap` 串在 `MiniMaxH3SigmaShift` 之后，采样输出接入 `MiniMax-H3 Video Pixel Decode` 即可。"
       ]
