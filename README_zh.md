@@ -50,7 +50,7 @@
 
 | 适配模型 | 当前状态 | ComfyUI 节点仓库 | Hugging Face 权重 | 说明 |
 | :--- | :---: | :--- | :--- | :--- |
-| **Qwen-Image 2.1** | 可正常使用 | [Wither033/ComfyUI-QwenImage21-PixelHead](https://github.com/Wither033/ComfyUI-QwenImage21-PixelHead) | [pocis/Qwen-Image-2.1-PixelHead](https://huggingface.co/pocis/Qwen-Image-2.1-PixelHead) | `48.8 MiB` (`1x`) / `52.1 MiB` (`1x`+`2x`)，4 通道 RGBA，`5.55 ms` (`67.1×`)，均值 `33.91 dB` |
+| **Qwen-Image 2.1** | 可正常使用 | [Wither033/ComfyUI-QwenImage21-PixelHead](https://github.com/Wither033/ComfyUI-QwenImage21-PixelHead) | [pocis/Qwen-Image-2.1-PixelHead](https://huggingface.co/pocis/Qwen-Image-2.1-PixelHead) | `v0.3` 小波版 (`79.3 MiB`, `37.5 ms`, `33.81 dB`, `LPIPS 0.0736`) + `v0.1` (`48.8 MiB`)，4 通道 RGBA |
 | **Krea-2** | 可正常使用 | [Wither033/ComfyUI-Krea2-PixelHead](https://github.com/Wither033/ComfyUI-Krea2-PixelHead) | [pocis/Krea-2-PixelHead](https://huggingface.co/pocis/Krea-2-PixelHead) | `52.6 MiB` BF16，`6144d` 降维桥 RGB，`59.55 ms` (`24.7×`)，均值 `33.33 dB` |
 | **MiniMax-H3** *(本仓库)* | 实验预览 | [Wither033/ComfyUI-MiniMaxH3-PixelHead](https://github.com/Wither033/ComfyUI-MiniMaxH3-PixelHead) | [pocis/MiniMax-H3-Video-PixelHead](https://huggingface.co/pocis/MiniMax-H3-Video-PixelHead) | 暂不推荐正式使用；`45.7 MiB` BF16，提速 `8.5×`，高频纹理偏糊 |
 | **训练代码与方法整理** | 工具与文档 | [Wither033/FastFrames-PixelHead-Trainer](https://github.com/Wither033/FastFrames-PixelHead-Trainer) | [HF 合集页](https://huggingface.co/collections/pocis/fastframes-zero-vae-direct-pixelheads-comfyui-6b031df8e9212f8bae294154) | 通用 `pixelhead_trainer` 库、各底座挂载点说明与 Colab L4 训练脚本 |
