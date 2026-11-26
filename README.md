@@ -65,7 +65,9 @@ Four factors explain the current softness and are targeted for the next revision
 2. Download `minimax_h3_video_pixel_head_bf16.safetensors` (`45.7 MiB`) from [pocis/MiniMax-H3-Video-PixelHead](https://huggingface.co/pocis/MiniMax-H3-Video-PixelHead) into `ComfyUI/models/pixel_heads/`.
 3. Example workflows are in [`example_workflows/`](example_workflows/). Place `MiniMax-H3 Video Pixel Head Tap` after `MiniMaxH3SigmaShift`, and connect `MiniMax-H3 Video Pixel Decode (Zero Video VAE)` to `SamplerCustomAdvanced`.
 
-## License & Credits
+## License, Attribution & Credits
 
-- **License**: MIT (clean-room PyTorch implementation).
-- **References**: [*FastFrames* (`arXiv:2611.23226`)](https://arxiv.org/abs/2611.23226) and `sorryhyun/anima-pixel-decoder`.
+
+- **Original Pixel Decoder & Training Pipeline Author**: **[Seunghyun Ji (`sorryhyun`)](https://huggingface.co/sorryhyun)** ([GitHub `@sorryhyun`](https://github.com/sorryhyun)) — author and publisher of **[`sorryhyun/anima_lora`](https://github.com/sorryhyun/anima_lora)** (`project/pixel_decoder`, `library/anima/pixel_head.py`, `scripts/pixel_head/`), **[`sorryhyun/anima_pixel_decoder`](https://huggingface.co/sorryhyun/anima-pixel-decoder)**, and **[`sorryhyun/ComfyUI-Anima-PixelDecoder`](https://github.com/sorryhyun/ComfyUI-Anima-PixelDecoder)**. Key architectural and training recipes adapted here — including the no-skip ConvNeXt + `2×` `PixelShuffle` `1x`/`2x` head layout, pre-linear `f_u + g·(f_c - f_u)` feature tap + latent patch embedding, single-step teacher-forced `ReplayBuffer` distillation against `VAE(x̂0)` across mixed Base/Turbo `σ` points, 4-channel RGBA readout, and 2D Haar wavelet `(LL, LH, HL, HH)` + detached-`LL` adversarial training — build directly upon `sorryhyun`'s work.
+- **Foundational Paper**: [*FastFrames: Video Generation at Interactive Latency* (`arXiv:2611.23226`)](https://arxiv.org/abs/2611.23226) (Gene Chou, Guandao Yang, Fujun Luan, Lars Mescheder, Wei Dong, Stephan R. Richter, Vladlen Koltun — Apple & Cornell, 2026).
+- **License**: Released under the [MIT License](LICENSE) (retaining `Copyright (c) 2026 Seunghyun Ji` and `Copyright (c) 2026 Wither033 / pocis`). Usage with Qwen-Image 2.1, Krea-2, or MiniMax-H3 models remains subject to each respective upstream base model's license terms.
